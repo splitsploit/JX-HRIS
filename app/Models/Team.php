@@ -15,4 +15,16 @@ class Team extends Model
         'icon',
         'company_id'
     ];
+
+    // one to many
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    // one to many
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
