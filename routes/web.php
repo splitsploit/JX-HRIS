@@ -26,8 +26,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('test', function()
-    {
-        return 'Halo';
-    });
+    // <!-- Route::get('test', function()
+    // {
+    //     return 'Halo';
+    // }); -->
 });
