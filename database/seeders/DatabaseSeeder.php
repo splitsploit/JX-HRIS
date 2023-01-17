@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Company;
 use App\Models\Team;
 use App\Models\Role;
+use App\Models\Responsibility;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +26,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // Team::factory(10)->create();
-        Role::factory(10)->create();
+        // Role::factory(10)->create();
+        Responsibility::factory(10)->create();
         // ]);
     }
 }
