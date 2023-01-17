@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Team;
 use App\Models\Role;
 use App\Models\Responsibility;
+use App\Models\Employee;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +28,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // Team::factory(10)->create();
         // Role::factory(10)->create();
-        Responsibility::factory(10)->create();
+        // Responsibility::factory(10)->create();
+        Employee::factory(10)->create();
         // ]);
     }
 }
