@@ -10,6 +10,7 @@ use App\Models\Team;
 use App\Models\Role;
 use App\Models\Responsibility;
 use App\Models\Employee;
+use Database\Factories\UserCompanyFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +30,7 @@ class DatabaseSeeder extends Seeder
         // Team::factory(10)->create();
         // Role::factory(10)->create();
         // Responsibility::factory(10)->create();
-        Employee::factory(10)->create();
+        // Employee::factory(10)->create();
         // ]);
     }
 }
