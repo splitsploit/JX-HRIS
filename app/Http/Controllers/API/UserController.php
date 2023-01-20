@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
@@ -47,5 +48,26 @@ class UserController extends Controller
         } catch (Exception $e) {
             return ResponseFormatter::error('Authentication Failed');
         }
+    }
+
+    public function register()
+    {
+
+        try {
+            
+        // Validate Request
+
+        // Create User
+
+        // Generate Token
+
+        // Return Response
+        
+        } catch (Exception $error) {
+            
+            // Return Error Response
+
+        }
+        
     }
 }
