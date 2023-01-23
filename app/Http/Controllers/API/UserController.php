@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Rules\Password;
 use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
@@ -50,23 +51,39 @@ class UserController extends Controller
         }
     }
 
-    public function register()
+    public function register(Request $request)
     {
 
         try {
             
         // Validate Request
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', new Password],
+        ]);
 
         // Create User
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
         // Generate Token
+        $tokenResult = $user->createToken('authToken')->plainTextToken;
 
         // Return Response
-        
+        return ResponseFormatter::success([
+            'access_token' => $tokenResult,
+            'token_type' => 'Bearer',
+            'user' => $user,
+        ], 'Register Success');
+
         } catch (Exception $error) {
             
             // Return Error Response
-
+            return ResponseFormatter::error('Authentication Failed');
         }
         
     }
