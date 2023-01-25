@@ -11,10 +11,11 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 
 class CompanyController extends Controller
 {
-    public function all(Request $request)
+    public function fetch(Request $request)
     {
         $id = $request->input('id');
         $name = $request->input('name');
@@ -84,5 +85,36 @@ class CompanyController extends Controller
         }
 
         
+    }
+
+    public function update(UpdateCompanyRequest $request, $id)
+    {
+        try {
+            // find company that will be update
+            $company = Company::find($id);
+
+            // if company not found
+            if (!$company)
+            {
+                throw new Exception('Company Not Found!');
+            }
+
+            // upload logo
+            if ($request->hasFile('logo'))
+            {
+                $path = $request->file('logo')->store('public/logos');
+            }
+
+            // update company
+            $company->update([
+                'name' => $request->name,
+                'logo' => $path,
+            ]);
+
+            return ResponseFormatter::success($company, 'Company Updated!');
+
+        } catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(), 500);
+        }
     }
 }
