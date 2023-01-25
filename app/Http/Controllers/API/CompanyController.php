@@ -56,5 +56,7 @@ class CompanyController extends Controller
             'name' => $request->name,
             'logo' => $path,
         ]);
+
+        return ResponseFormatter::success($company, 'Company Created');
     }
 }

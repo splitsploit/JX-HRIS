@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('company', [CompanyController::class, 'all']);
+Route::post('company', [CompanyController::class, 'create'])->middleware('auth:sanctum');
 
 
 // Endpoint Authentication
