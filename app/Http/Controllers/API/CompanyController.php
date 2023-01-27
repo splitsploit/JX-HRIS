@@ -21,10 +21,13 @@ class CompanyController extends Controller
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
 
+        // get single data
         //jxhris.com/api/company?id=1
         if ($id)
         {
-            $company = Company::with('users')->find($id);
+            $company = Company::with('users')->whereHas('users', function($query){
+                $query->where('user_id', Auth::id());
+            })->find($id);
 
             if ($company)
             {
@@ -34,8 +37,11 @@ class CompanyController extends Controller
             return ResponseFormatter::error('Company Not Found!', 404);
         }
 
+        // get multiple data
         // jxhris.com/api/company
-        $companies = Company::with(['users']);
+        $companies = Company::with('users')->whereHas('users', function($query){
+            $query->where('user_id', Auth::id());
+        });
 
         // jxhris.com/api/company?name=NamaCompany
         if ($name)
